@@ -22,6 +22,7 @@ model User {
   verifyCode       Int?
   isVerified       Boolean   @default(false)
   verifyCodeExpire DateTime?
+  isForgetPassword Boolean   @default(false)
 }
 
 model Chat {
