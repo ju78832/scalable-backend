@@ -19,7 +19,7 @@ model User {
   name             String?
   password         String
   Chat             Chat[]
-  verifyCode       Int?
+  verifyCode       String?
   isVerified       Boolean   @default(false)
   verifyCodeExpire DateTime?
   isForgetPassword Boolean   @default(false)
