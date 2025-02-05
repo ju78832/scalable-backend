@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const code = Math.ceil(Math.random() * 900000 + 100000);
+    const code = Math.ceil(Math.random() * 900000 + 100000).toString();
     const time = new Date(Date.now() + 5 * 60 * 1000);
 
     const user = await prisma.user.create({
