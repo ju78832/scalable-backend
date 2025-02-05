@@ -34,12 +34,33 @@ export const authOptions: any = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }: { user: AuthUser; account: Account }) {
-      if (account.provider == "credentials") {
-        console.log(user);
-        return true;
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.isVerified = user.isVerified;
       }
+      return token;
     },
+    async session({ session, token }: any) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.isVerified = token.isVerified;
+      }
+
+      return session;
+    },
+  },
+
+  session: {
+    strategy: "jwt",
+  },
+
+  pages: {
+    signIn: "/sign-in",
   },
 };
 
