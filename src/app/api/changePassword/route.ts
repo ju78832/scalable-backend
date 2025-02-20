@@ -16,6 +16,8 @@ export async function POST(req: NextRequest) {
         password: hashedPassword,
         isForgetPassword: false,
         isVerified: true,
+        verifyCode: undefined,
+        verifyCodeExpire: undefined,
       },
     });
     return NextResponse.json(

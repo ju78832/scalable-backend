@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { prisma } from "@/helper";
 import { createClient } from "redis";
 import { RedisClientType } from "@redis/client";
+import { error } from "console";
 
 let client: RedisClientType;
 let cacheData: any;
@@ -95,6 +96,9 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const email = searchParams.get("email");
+  if (!email) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
 
   try {
     cacheData = await client.get("chat");
@@ -109,6 +113,10 @@ export async function GET(req: NextRequest) {
         },
       },
     });
+
+    if (!chat) {
+      return NextResponse.json({ error: "Chat not found" }, { status: 404 });
+    }
 
     cacheData = await client.set("chat", JSON.stringify(chat));
 
