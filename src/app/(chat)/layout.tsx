@@ -2,17 +2,9 @@
 
 import Bar from "@/components/bar";
 
-export default async function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <div className="relative w-full flex items-center justify-center">
-        <Bar />
-      </div>
-      {children}
-    </div>
-  );
+}
+export default async function RootLayout({ children }: RootLayoutProps) {
+  return <div className="">{children}</div>;
 }

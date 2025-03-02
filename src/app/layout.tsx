@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
-import { getServerSession } from "next-auth";
-import SessionProvider from "../helper/SessionProvider";
-import Bar from "@/components/bar";
+import AuthProvider from "@/context/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,12 +12,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
   return (
     <html lang="en">
-      <body className="darkmode w-screen">
-        <SessionProvider session={session}>{children}</SessionProvider>
-      </body>
+      <AuthProvider>
+        <body className="darkmode ">{children}</body>
+      </AuthProvider>
     </html>
   );
 }

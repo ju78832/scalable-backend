@@ -1,9 +1,9 @@
-import Hero from "@/components/hero";
+import Bar from "@/components/bar";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
+    <main className="flex h-screen">
+      <Bar />
     </main>
   );
 }
